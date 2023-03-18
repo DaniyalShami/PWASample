@@ -1,0 +1,56 @@
+const createError = require('http-errors');
+const express = require('express');
+const path = require('path');
+const cookieParser = require('cookie-parser');
+const logger = require('morgan');
+const mime = require('mime');
+
+const indexRouter = require('./routes/index');
+const usersRouter = require('./routes/users');
+
+const app = express();
+
+// view engine setup
+app.set('views', path.join(__dirname, 'views'));
+app.set('view engine', 'jade');
+
+app.use(logger('dev'));
+app.use(express.json());
+app.use(express.urlencoded({ extended: false }));
+app.use(cookieParser());
+app.use(express.static(path.join(__dirname, 'client', 'public')));
+app.use('/src', express.static(path.join(__dirname, 'client', 'src')));
+app.use('/service-worker.js', (req, res, next) => {
+  res.setHeader('Content-Type', 'application/javascript');
+  next();
+});
+
+// Serve service worker file with correct MIME type
+app.get('/service-worker.js', (req, res) => {
+  const filePath = path.join(__dirname, 'client', 'public', 'service-worker.js');
+  const mimeType = mime.getType(filePath);
+  res.setHeader('Content-Type', mimeType);
+  res.sendFile(filePath);
+});
+
+app.use('/', indexRouter);
+app.use('/users', usersRouter);
+
+// catch 404 and forward to error handler
+app.use(function(req, res, next) {
+  next(createError(404));
+});
+
+// error handler
+app.use(function(err, req, res, next) {
+  // set locals, only providing error in development
+  res.locals.message = err.message;
+  res.locals.error = req.app.get('env') === 'development' ? err : {};
+
+  // render the error page
+  res.status(err.status || 500);
+  res.render('error');
+});
+
+module.exports = app;
+
