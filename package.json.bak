@@ -9,5 +9,5 @@
 	"pushRepo": "git push -u origin main"
   },
   "author": "",
-  "license": "ISC"
+  "license": "Unlicense"
 }

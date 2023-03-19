@@ -9,5 +9,5 @@
 	"pushRepo": "git push -u origin main"
   },
   "author": "",
-  "license": "Unlicense"
+  "license": "GNU AGPLv3"
 }
