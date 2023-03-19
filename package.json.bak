@@ -4,7 +4,7 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-	"start": "docker-compose build frontend && docker-compose build backend && docker-compose up"
+	"start": "docker-compose build frontend && docker-compose build backend && docker-compose up",
     "upRepo": "git status && git add . && git status && git commit -m 'Milestone_Committed' && git status && git log --oneline"
   },
   "author": "",

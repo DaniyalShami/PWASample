@@ -18,6 +18,7 @@
 	- cd <app_backend> && rm -rf .git*
 	- git init && npm init
 	- Create the "upRepo" npm script in the 'package.json' of the root directory
+	- Create the "pushRepo" npm script in the 'package.json' of the root directory
 	- Create the "start" npm script in the 'package.json' of the root directory
 
 #### 4. Set up to be a PWA:
@@ -42,4 +43,4 @@
 	- npm run upRepo
 	- git remote add origin https://github.com/<Github_Username>/<Github_Repository_Name>.git
 	- git branch -M main
-	- git push -u origin main (For future changes, ignore above two)
+	- npm run pushRepo (For future changes, ignore above two)
